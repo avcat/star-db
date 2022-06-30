@@ -3,21 +3,65 @@ import './App.css';
 
 const App = () => {
 
-  const get_data_from_url = async ( url ) => {
-    try {
-      const response = await fetch( url );
-      if ( !response.ok ) { // if result status is not the one of 200-299
-        throw new Error( `Could not fetch from ${ url } - received status ${ response.status }` );
-      }
+  class Swapi_Service {
 
-      const data = await response.json();
-      console.log( data.name );
+    _api_base = 'https://swapi.dev/api'; // private class property
+
+    async get_data_from_url ( url_part ) {
+      try {
+        const full_path = `${ this._api_base }${ url_part }`;
+        const response = await fetch( full_path );
+        if ( !response.ok ) { // if result status is not the one of 200-299
+          throw new Error( `Could not fetch from ${ full_path } - received status ${ response.status }` );
+        }
+        const data = await response.json();
+        return data;
+      }
+      catch( err ) {
+        console.error( `No way! ${err}` );
+      };
     }
-    catch( err ) {
-      console.error( `No way! ${err}` );
-    };
+
+    async get_all_people() {
+      const data = await this.get_data_from_url( `/people/` );
+      const array_of_objects = await data.results;
+      return array_of_objects;
+    }
+    async get_single_person( id ) {
+      const single_object = await this.get_data_from_url( `/people/${ id }` );
+      return single_object;
+    }
+
+    async get_all_planets() {
+      const data = await this.get_data_from_url( `/planets/` );
+      const array_of_objects = await data.results;
+      return array_of_objects;
+    }
+    async get_single_planet( id ) {
+      const single_object = await this.get_data_from_url( `/planets/${ id }` );
+      return single_object;
+    }
   }
-  get_data_from_url( 'https://swapi.dev/api/people/123432' );
+
+  // --- Getting data ---
+
+  const swapi = new Swapi_Service();
+
+  const get_people = async () => {
+    const people_array = await swapi.get_all_people();
+    people_array.forEach(person => {
+      console.log( 'People:', person.name );
+    });
+  }
+  get_people();
+
+  const get_planet = async () => {
+    const result = await swapi.get_single_planet( 1 );
+    console.log( 'Planet:', result );
+  }
+  get_planet();
+
+  // --- Render component ---
 
   return (
     <div className="App">
