@@ -9,6 +9,42 @@ body {
   justify-content: center;
 }
 
+#root {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .App {
-  font-size: 1.5em;
+  width: 100%;
+  font-size: 1em;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.App :is(.Header, .Details) {
+  grid-column: span 3;
+}
+
+.App .Header.all {
+  grid-column: span 1;
+}
+
+.App .Details.all {
+  grid-column: span 2;
+}
+
+.App .Details.all > img {
+  max-width: 12em;
+  max-height: 12em;
+}
+
+a {
+  text-decoration: none;
+  transition: all .25s linear;
+}
+
+li {
+  list-style: none;
 }

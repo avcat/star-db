@@ -1,0 +1,8 @@
+.List li {
+  cursor: pointer;
+  transition: all .15s linear;
+}
+
+.List li:hover {
+  background-color: #444;
+}

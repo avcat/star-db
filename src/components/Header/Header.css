@@ -1,0 +1,11 @@
+.Header ul li:hover a {
+  background-color: #444;
+}
+
+.Header h3 a {
+  color: white;
+}
+
+.Header h3 a:hover {
+  color: #00bc8c;
+}
