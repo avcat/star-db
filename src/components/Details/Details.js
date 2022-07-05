@@ -17,15 +17,15 @@ const Details = (props) => {
 				<h4 className='text-center'>R2-D2</h4>
 				{/* TODO: pass here List component with props */}
 				<ul className="list-group">
-					<li className="list-group-item">
+					<li className="list-group-item d-flex justify-content-between">
 						<span className="term">Gender</span>
 						<span>male</span>
 					</li>
-					<li className="list-group-item">
+					<li className="list-group-item d-flex justify-content-between">
 						<span className="term">Birth Year</span>
 						<span>43</span>
 					</li>
-					<li className="list-group-item">
+					<li className="list-group-item d-flex justify-content-between">
 						<span className="term">Eye Color</span>
 						<span>red</span>
 					</li>

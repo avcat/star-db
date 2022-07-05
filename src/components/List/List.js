@@ -1,7 +1,10 @@
 import './List.css';
 
 const List = (props) => {
-	const add_class = props.add_class || '';
+	const { data, add_class } = props;
+
+	console.log(data);
+
 	return (
 		<ul className={'List item-list list-group ' + add_class}>
 			<li className="list-group-item">

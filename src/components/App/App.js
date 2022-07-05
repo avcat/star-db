@@ -1,4 +1,5 @@
 import React from 'react';
+
 import '../../css/bootstrap.min.css';
 import './App.css';
 import SwapiService from '../../services/SwapiService.js';
@@ -7,36 +8,60 @@ import Header from '../Header';
 import Details from '../Details';
 import List from '../List';
 
-const App = () => {
+export default class App extends React.Component {
 
-  const swapi = new SwapiService();
+  SwapiService = new SwapiService();
 
-  const get_people = async () => {
-    const people_array = await swapi.get_all_people();
-    people_array.forEach(person => {
-      console.log( 'People:', person.name );
-    });
+  state = {
+    people: null,
+    planets: null,
+    starships: null
   }
-  get_people();
 
-  const get_planet = async () => {
-    const result = await swapi.get_single_planet( 1 );
-    console.log( 'Planet:', result );
+  constructor() {
+    super();
+    this.get_people();
+    this.get_planets();
+    this.get_starships();
   }
-  get_planet();
 
-  return (
-    <div className="App p-4">
-      <Header />
-      {/* TODO: Pass props to Details */}
-      <Details />
+  get_people = async () => {
+    const people = await this.SwapiService.get_all_people();
+    this.setState({people});
+  }
 
-      {/* TODO: Pass props to List */}
-      <List add_class={'all'} />
-      <Details add_class={'all'} />
-    </div>
-  );
+  get_planets = async () => {
+    const planets = await this.SwapiService.get_all_planets();
+    this.setState({planets});
+  }
+
+  get_starships = async () => {
+    const starships = await this.SwapiService.get_all_starships();
+    this.setState({starships});
+  }
+
+  render() {
+
+    const {
+      people,
+      planets,
+      starships
+    } = this.state;
+
+
+    return (
+      <div className="App p-4">
+        <Header />
+        {/* TODO: Pass props to Details */}
+        <Details />
+
+        {/* TODO: Pass props to List */}
+        <List
+          add_class={'all'}
+        />
+        <Details add_class={'all'} />
+      </div>
+    );
+  }
 
 }
-
-export default App;

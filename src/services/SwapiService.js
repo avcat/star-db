@@ -1,15 +1,22 @@
 export default class Swapi_Service {
 
-	_api_base = 'https://swapi.dev/api'; // private class property
+	_api_base = 'https://swapi.dev/api';
+	_api_img_base = 'https://starwars-visualguide.com/assets/img';
 
-	async get_data_from_url ( url_part ) {
+	async get_data_from_url ( url_part, type = 'data' ) {
+
 		try {
-			const full_path = `${ this._api_base }${ url_part }`;
+			const full_path = type === 'data' ? (
+				`${ this._api_base }${ url_part }`
+			) : (
+				`${ this._api_img_base }${ url_part }`
+			);
+
 			const response = await fetch( full_path );
 			if ( !response.ok ) { // if result status is not the one of 200-299
 				throw new Error( `Could not fetch from ${ full_path } - received status ${ response.status }` );
 			}
-			const data = await response.json();
+			const data = type === 'data' ? await response.json() : await response.url;
 			return data;
 		}
 		catch( err ) {
@@ -26,6 +33,10 @@ export default class Swapi_Service {
 		const single_object = await this.get_data_from_url( `/people/${ id }` );
 		return single_object;
 	}
+	async get_person_image( id ) {
+		const single_img = await this.get_data_from_url( `/characters/${ id }.jpg`, 'img' );
+		return single_img;
+	}
 
 	async get_all_planets() {
 		const data = await this.get_data_from_url( `/planets/` );
@@ -36,4 +47,23 @@ export default class Swapi_Service {
 		const single_object = await this.get_data_from_url( `/planets/${ id }` );
 		return single_object;
 	}
+	async get_planet_image( id ) {
+		const single_img = await this.get_data_from_url( `/planets/${ id }.jpg`, 'img' );
+		return single_img;
+	}
+
+	async get_all_starships() {
+		const data = await this.get_data_from_url( `/starships/` );
+		const array_of_objects = await data.results;
+		return array_of_objects;
+	}
+	async get_single_starship( id ) {
+		const single_object = await this.get_data_from_url( `/starships/${ id }` );
+		return single_object;
+	}
+	async get_starship_image( id ) {
+		const single_img = await this.get_data_from_url( `/starships/${ id }.jpg`, 'img' );
+		return single_img;
+	}
+
 }
