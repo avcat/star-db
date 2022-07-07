@@ -23,15 +23,11 @@ body {
   grid-column: span 3;
 }
 
-.App .Header.all {
-  grid-column: span 1;
-}
-
-.App .Details.all {
+.App .Details.medium {
   grid-column: span 2;
 }
 
-.App .Details.all > img {
+.App .Details.medium > img {
   max-width: 12em;
   max-height: 12em;
 }

@@ -1,12 +1,9 @@
 import './List.css';
 
 const List = (props) => {
-	const { data, add_class } = props;
-
-	console.log(data);
 
 	return (
-		<ul className={'List item-list list-group ' + add_class}>
+		<ul className='List item-list list-group'>
 			<li className="list-group-item">
 				Luke Skywalker
 			</li>
