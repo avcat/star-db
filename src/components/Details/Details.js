@@ -5,13 +5,7 @@ import SwapiService from '../../services/SwapiService.js';
 
 export default class Details extends React.Component {
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			type: props.type,
-			id: props.id
-		}
-	}
+	state = {}
 
 	SwapiService = new SwapiService();
 
@@ -24,21 +18,22 @@ export default class Details extends React.Component {
 
 	get_data = async () => {
 		const id = this.props.id || Math.floor(Math.random() * 9 + 1);
-		switch( this.state.type ) {
-			case 'person':
-				return await this.SwapiService.get_single_person(id);
-			case 'planet':
-				return await this.SwapiService.get_single_planet(id);
-			case 'starship':
-				return await this.SwapiService.get_single_starship(id);
-			default:
-				return null;
+		let data;
+
+		switch( this.props.type ) {
+			case 'person': data = await this.SwapiService.get_single_person(id); break;
+			case 'planet': data = await this.SwapiService.get_single_planet(id); break;
+			case 'starship': data = await this.SwapiService.get_single_starship(id); break;
+			default: data = null; break;
 		}
+
+		this.setState({data});
 	}
 
-	componentWillMount() {
-		const data = this.get_data();
-		this.setState({ data }); // returns Promise
+	componentDidMount() {
+		const { type, id } = this.props;
+		this.setState({type, id});
+		this.get_data();
 	}
 
 	render() {
@@ -51,6 +46,8 @@ export default class Details extends React.Component {
 
 				<div className="card-body">
 					<h4 className='text-center'>R2-D2</h4>
+
+					{/* TODO: use retrieved data to create a list of properties */}
 					<ul className="list-group">
 						<li className="list-group-item d-flex justify-content-between">
 							<span className="term">Gender</span>

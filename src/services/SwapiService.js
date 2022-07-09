@@ -1,4 +1,10 @@
+import { get_properties } from './helpers.js';
+
 export default class Swapi_Service {
+
+	constructor() {
+		this.get_properties = get_properties;
+	}
 
 	_api_base = 'https://swapi.dev/api';
 	_api_img_base = 'https://starwars-visualguide.com/assets/img';
@@ -27,11 +33,17 @@ export default class Swapi_Service {
 	async get_all_people() {
 		const data = await this.get_data_from_url( `/people/` );
 		const array_of_objects = await data.results;
+		// TODO: prepare data
 		return array_of_objects;
 	}
 	async get_single_person( id ) {
 		const single_object = await this.get_data_from_url( `/people/${ id }` );
-		return single_object;
+		// TODO: include image to get_properties
+		const data = this.get_properties([
+			'birth_year', 'eye_color', 'gender', 'hair_color', 'height', 'name',
+			'homeworld', 'starships'
+		], single_object);
+		return data;
 	}
 	async get_person_image( id ) {
 		const single_img = await this.get_data_from_url( `/characters/${ id }.jpg`, 'img' );
@@ -41,10 +53,12 @@ export default class Swapi_Service {
 	async get_all_planets() {
 		const data = await this.get_data_from_url( `/planets/` );
 		const array_of_objects = await data.results;
+		// TODO: prepare data
 		return array_of_objects;
 	}
 	async get_single_planet( id ) {
 		const single_object = await this.get_data_from_url( `/planets/${ id }` );
+		// TODO: get prepared data
 		return single_object;
 	}
 	async get_planet_image( id ) {
@@ -55,10 +69,12 @@ export default class Swapi_Service {
 	async get_all_starships() {
 		const data = await this.get_data_from_url( `/starships/` );
 		const array_of_objects = await data.results;
+		// TODO: prepare data
 		return array_of_objects;
 	}
 	async get_single_starship( id ) {
 		const single_object = await this.get_data_from_url( `/starships/${ id }` );
+		// TODO: get prepared data
 		return single_object;
 	}
 	async get_starship_image( id ) {
