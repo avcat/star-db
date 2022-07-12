@@ -1,0 +1,8 @@
+.Planet > img {
+	max-width: 18em;
+	max-height: 18em;
+}
+
+.Planet .card-body {
+	width: 100%;
+}

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import './Details.css';
+import './Starship.css';
 import SwapiService from '../../services/SwapiService.js';
 
-export default class Details extends React.Component {
+export default class Starship extends React.Component {
 
 	state = {}
 	SwapiService = new SwapiService();
@@ -11,11 +11,11 @@ export default class Details extends React.Component {
 	render() {
 
 		return (
-			<div className='Details card d-flex flex-row align-items-center p-4 gap-3'>
+			<div className='Starship card d-flex flex-row align-items-center p-4 gap-3'>
 				<img className="person-image" src="https://starwars-visualguide.com/assets/img/characters/3.jpg" alt='details' />
 
 				<div className="card-body">
-					<h4 className='text-center'>R2-D2</h4>
+					<h4 className='text-center'>Starship</h4>
 
 					<ul className="list-group">
 						<li className="list-group-item d-flex justify-content-between">

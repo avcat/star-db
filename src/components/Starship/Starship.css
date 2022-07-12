@@ -1,0 +1,8 @@
+.Starship > img {
+	max-width: 18em;
+	max-height: 18em;
+}
+
+.Starship .card-body {
+	width: 100%;
+}

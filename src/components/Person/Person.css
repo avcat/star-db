@@ -1,0 +1,8 @@
+.Person > img {
+	max-width: 18em;
+	max-height: 18em;
+}
+
+.Person .card-body {
+	width: 100%;
+}
