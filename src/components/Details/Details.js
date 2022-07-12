@@ -2,6 +2,7 @@ import React from 'react';
 
 import './Details.css';
 import SwapiService from '../../services/SwapiService.js';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class Details extends React.Component {
 
@@ -28,6 +29,7 @@ export default class Details extends React.Component {
 		}
 
 		this.setState({data});
+		return data;
 	}
 
 	componentDidMount() {
@@ -38,7 +40,43 @@ export default class Details extends React.Component {
 
 	render() {
 
-		console.log(this.state);
+		const get_properties_list = async () => {
+			const data = await this.state.data;
+
+			if (!data && typeof(data) !== 'object') { return null; }
+
+			if (Object.entries(data).length <= 0) { return null; }
+
+			const data_array = Object.entries(data);
+
+			console.log(2, data_array);
+
+			const properties_list = data_array.map((property, index) => {
+				const key = uuidv4();
+
+				return (
+					<li
+						key={key}
+						className="list-group-item d-flex justify-content-between"
+					>
+						<span className='property_title term'>
+							{property[0]}
+						</span>
+						<span className='property_name'>
+							{property[1]}
+						</span>
+					</li>
+				);
+			});
+
+			console.log(3, properties_list);
+
+			return properties_list;
+		}
+
+		const data = this.state.data;
+		const properties_list = get_properties_list(this.state.data);
+		console.log(1, data, properties_list);
 
 		return (
 			<div className={'Details card d-flex flex-row align-items-center p-4 gap-3 ' + this.get_classes()}>
@@ -49,18 +87,7 @@ export default class Details extends React.Component {
 
 					{/* TODO: use retrieved data to create a list of properties */}
 					<ul className="list-group">
-						<li className="list-group-item d-flex justify-content-between">
-							<span className="term">Gender</span>
-							<span>male</span>
-						</li>
-						<li className="list-group-item d-flex justify-content-between">
-							<span className="term">Birth Year</span>
-							<span>43</span>
-						</li>
-						<li className="list-group-item d-flex justify-content-between">
-							<span className="term">Eye Color</span>
-							<span>red</span>
-						</li>
+						{properties_list}
 					</ul>
 				</div>
 			</div>
