@@ -10,27 +10,19 @@ export default class Planet extends React.Component {
 		population: null,
 		rotation_period: null,
 		diameter: null,
-		image: null
+		image_url: null
 	}
 
-	constructor() {
+	constructor(props) {
 		super();
-		this.get_data(1);
+		this.get_data(props.id);
 	}
 
 	SwapiService = new SwapiService();
 
 	get_data = async (id) => {
 		const data = await this.SwapiService.get_single_planet(id);
-		const image = await this.SwapiService.get_planet_image(id);
-
-		this.setState({
-			name: data.name,
-			population: data.population,
-			rotation_period: data.rotation_period,
-			diameter: data.diameter,
-			image: image || null
-		});
+		this.setState(data);
 	}
 
 	render() {
@@ -40,11 +32,11 @@ export default class Planet extends React.Component {
 			population,
 			rotation_period,
 			diameter,
-			image
+			image_url
 		} = this.state;
 
-		const image_html = image ? (
-			<img className="person-image" src={image} alt='details' />
+		const image_html = image_url ? (
+			<img className="image" src={image_url} alt='details' />
 		) : ( null );
 
 		return (

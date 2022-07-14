@@ -30,15 +30,20 @@ export default class Swapi_Service {
 		};
 	}
 
+	get_id = ( object ) => {
+		const id = parseInt(object?.url.match(/\d+/g)[0]);
+		return id;
+	}
+
+	// -------------------------------- PEOPLE --------------------------------
+
 	async get_all_people() {
 		const data = await this.get_data_from_url( `/people/` );
 		const array_of_objects = await data.results;
-		// TODO: prepare data
 		return array_of_objects;
 	}
 	async get_single_person( id ) {
 		const single_object = await this.get_data_from_url( `/people/${ id }` );
-		// TODO: include image to get_properties
 		const data = this.get_properties([
 			'birth_year', 'eye_color', 'gender', 'hair_color', 'height', 'name',
 			'homeworld', 'starships'
@@ -50,31 +55,49 @@ export default class Swapi_Service {
 		return single_img;
 	}
 
-	async get_all_planets() {
-		const data = await this.get_data_from_url( `/planets/` );
-		const array_of_objects = await data.results;
-		// TODO: prepare data
-		return array_of_objects;
-	}
-	async get_single_planet( id ) {
-		const single_object = await this.get_data_from_url( `/planets/${ id }` );
-		// TODO: get prepared data
-		return single_object;
-	}
+	// -------------------------------- PLANETS --------------------------------
+
 	async get_planet_image( id ) {
 		const single_img = await this.get_data_from_url( `/planets/${ id }.jpg`, 'img' );
 		return single_img;
 	}
 
+	async transform_data_planet(planet) {
+		const id = this.get_id(planet);
+		const image_url = await this.get_planet_image(id);
+
+		return {
+			id: id,
+			name: planet.name,
+			population: planet.population,
+			rotation_period: planet.rotation_period,
+			diameter: planet.diameter,
+			image_url: image_url
+		}
+	}
+
+	async get_single_planet( id ) {
+		const planet = await this.get_data_from_url( `/planets/${ id }` );
+		const transformed_planet_data = await this.transform_data_planet(planet);
+		return transformed_planet_data;
+	}
+
+	async get_all_planets() {
+		const data = await this.get_data_from_url( `/planets/` );
+		const results = data.results;
+		// const prepared_data = results.map(planet => this.transform_data_planet(planet)); // TODO: resolve pending Promise
+		return results;
+	}
+
+	// -------------------------------- STARSHIPS --------------------------------
+
 	async get_all_starships() {
 		const data = await this.get_data_from_url( `/starships/` );
 		const array_of_objects = await data.results;
-		// TODO: prepare data
 		return array_of_objects;
 	}
 	async get_single_starship( id ) {
 		const single_object = await this.get_data_from_url( `/starships/${ id }` );
-		// TODO: get prepared data
 		return single_object;
 	}
 	async get_starship_image( id ) {

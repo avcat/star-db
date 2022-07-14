@@ -26,6 +26,9 @@ li {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }
 
 .App > * {
