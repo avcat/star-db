@@ -2,15 +2,12 @@ import React from 'react';
 
 import './Planet.css';
 import SwapiService from '../../services/SwapiService.js';
+import Spinner from '../Spinner';
 
 export default class Planet extends React.Component {
 
 	state = {
-		name: null,
-		population: null,
-		rotation_period: null,
-		diameter: null,
-		image_url: null
+		planet: {}
 	}
 
 	constructor(props) {
@@ -22,8 +19,8 @@ export default class Planet extends React.Component {
 	SwapiService = new SwapiService();
 
 	get_data = async (id) => {
-		const data = await this.SwapiService.get_single_planet(id);
-		this.setState(data);
+		const planet = await this.SwapiService.get_single_planet(id);
+		this.setState({planet});
 	}
 
 	render() {
@@ -34,7 +31,7 @@ export default class Planet extends React.Component {
 			rotation_period,
 			diameter,
 			image_url
-		} = this.state;
+		} = this.state.planet;
 
 		const image_html = image_url ? (
 			<img className="image" src={image_url} alt='details' />
@@ -44,6 +41,8 @@ export default class Planet extends React.Component {
 			<div className='Planet card d-flex flex-row align-items-center p-4 gap-3'>
 
 				{image_html}
+
+				<Spinner width={60} />
 
 				<div className="card-body">
 					<h4 className='text-center'>{name}</h4>
