@@ -37,22 +37,39 @@ export default class Swapi_Service {
 
 	// -------------------------------- PEOPLE --------------------------------
 
-	async get_all_people() {
-		const data = await this.get_data_from_url( `/people/` );
-		const array_of_objects = await data.results;
-		return array_of_objects;
-	}
-	async get_single_person( id ) {
-		const single_object = await this.get_data_from_url( `/people/${ id }` );
-		const data = this.get_properties([
-			'birth_year', 'eye_color', 'gender', 'hair_color', 'height', 'name',
-			'homeworld', 'starships'
-		], single_object);
-		return data;
-	}
 	async get_person_image( id ) {
 		const single_img = await this.get_data_from_url( `/characters/${ id }.jpg`, 'img' );
 		return single_img;
+	}
+
+	async transform_data_person(person) {
+		const id = this.get_id(person);
+		const image_url = await this.get_person_image(id);
+
+		return {
+			id: id,
+			name: person.name,
+			gender: person.gender,
+			birthYear: person.birthYear,
+			eyeColor: person.eyeColor,
+			image_url: image_url
+		}
+	}
+
+	async get_single_person( id ) {
+		const person = await this.get_data_from_url( `/people/${ id }` );
+		const transformed_data = await this.transform_data_person(person);
+		return transformed_data;
+	}
+
+	async get_all_people() {
+		const data = await this.get_data_from_url( `/people/` );
+		const transformed_data = await data.results.map(async (person) => {
+			const transformed_data = await this.transform_data_person(person);
+			return transformed_data;
+		});
+		const prepared_data = await Promise.all(transformed_data);
+		return prepared_data;
 	}
 
 	// -------------------------------- PLANETS --------------------------------
@@ -78,31 +95,59 @@ export default class Swapi_Service {
 
 	async get_single_planet( id ) {
 		const planet = await this.get_data_from_url( `/planets/${ id }` );
-		const transformed_planet_data = await this.transform_data_planet(planet);
-		return transformed_planet_data;
+		const transformed_data = await this.transform_data_planet(planet);
+		return transformed_data;
 	}
 
 	async get_all_planets() {
 		const data = await this.get_data_from_url( `/planets/` );
-		const results = data.results;
-		// const prepared_data = results.map(planet => this.transform_data_planet(planet)); // TODO: resolve pending Promise
-		return results;
+		const transformed_data = await data.results.map(async (planet) => {
+			const transformed_data = await this.transform_data_planet(planet);
+			return transformed_data;
+		});
+		const prepared_data = await Promise.all(transformed_data);
+		return prepared_data;
 	}
 
 	// -------------------------------- STARSHIPS --------------------------------
 
-	async get_all_starships() {
-		const data = await this.get_data_from_url( `/starships/` );
-		const array_of_objects = await data.results;
-		return array_of_objects;
-	}
-	async get_single_starship( id ) {
-		const single_object = await this.get_data_from_url( `/starships/${ id }` );
-		return single_object;
-	}
 	async get_starship_image( id ) {
 		const single_img = await this.get_data_from_url( `/starships/${ id }.jpg`, 'img' );
 		return single_img;
+	}
+
+	async transform_data_starship(starship) {
+		const id = this.get_id(starship);
+		const image_url = await this.get_starship_image(id);
+
+		return {
+			id: id,
+			name: starship.name,
+			model: starship.model,
+			manufacturer: starship.manufacturer,
+			costInCredits: starship.costInCredits,
+			length: starship.length,
+			crew: starship.crew,
+			passengers: starship.passengers,
+			cargoCapacity: starship.cargoCapacity,
+			image_url: image_url
+		}
+	}
+
+	async get_single_starship( id ) {
+		const starship = await this.get_data_from_url( `/starships/${ id }` );
+		const transformed_data = await this.transform_data_starship(starship);
+		return transformed_data;
+	}
+
+	async get_all_starships() {
+		const data = await this.get_data_from_url( `/starships/` );
+		const transformed_data = await data.results.map(async (starship) => {
+			const transformed_data = await this.transform_data_starship(starship);
+			return transformed_data;
+		});
+		const prepared_data = await Promise.all(transformed_data);
+		return prepared_data;
 	}
 
 }

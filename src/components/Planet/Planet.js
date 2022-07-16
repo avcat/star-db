@@ -15,7 +15,8 @@ export default class Planet extends React.Component {
 
 	constructor(props) {
 		super();
-		this.get_data(props.id);
+		const id = props.id || Math.floor(Math.random() * 9 + 1);
+		this.get_data(id);
 	}
 
 	SwapiService = new SwapiService();

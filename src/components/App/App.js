@@ -11,7 +11,7 @@ const App = () => {
   return (
     <div className="App p-4">
       <Header />
-      <Planet id={3} />
+      <Planet />
       {/* <Person /> */}
       {/* <Starship /> */}
     </div>
