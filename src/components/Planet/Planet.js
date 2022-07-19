@@ -3,12 +3,17 @@ import React from 'react';
 import './Planet.css';
 import SwapiService from '../../services/SwapiService.js';
 import Spinner from '../Spinner';
+import Error from '../Error';
 
 export default class Planet extends React.Component {
 
+	// TODO: create input field to load Planet by id on user's demand
+
 	state = {
 		planet: {},
-		loading: true
+		loading: true,
+		error: false,
+		message: null
 	}
 
 	constructor(props) {
@@ -20,22 +25,33 @@ export default class Planet extends React.Component {
 	SwapiService = new SwapiService();
 
 	get_data = async (id) => {
-		const planet = await this.SwapiService.get_single_planet(id);
-		this.setState({
-			planet,
-			loading: false
-		});
+		try {
+			const planet = await this.SwapiService.get_single_planet(id);
+			this.setState({
+				planet,
+				loading: false
+			});
+		} catch (err) {
+			this.setState({
+				loading: false,
+				error: true,
+				message: err.message
+			});
+		}
 	}
 
 	render() {
 
 		const {
 			planet,
-			loading
+			loading,
+			error,
+			message
 		} = this.state;
 
 		const content = loading ?
 			<Spinner width={60} /> :
+			error ? <Error message={message} /> :
 			<PlanetContent planet={planet} />;
 
 		return (
