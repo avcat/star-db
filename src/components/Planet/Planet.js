@@ -16,9 +16,8 @@ export default class Planet extends React.Component {
 		message: null
 	}
 
-	constructor(props) {
-		super();
-		const id = props.id || Math.floor(Math.random() * 9 + 1);
+	componentDidMount() {
+		const id = this.props.id || Math.floor(Math.random() * 9 + 1);
 		this.get_data(id);
 	}
 
@@ -73,7 +72,7 @@ const PlanetContent = ({planet}) => {
 
 	const image_html = image_url ? (
 		<img className="image rounded" src={image_url} alt='details' />
-	) : ( null );
+	) : null;
 
 	return (
 		<React.Fragment>
