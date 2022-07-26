@@ -9,6 +9,10 @@ export default class Planet extends React.Component {
 
 	// TODO: create input field to load Planet by id on user's demand
 
+	// TODO: shown random planet with intervals
+
+	// TODO: add buttons to manage autochanging planets showcase
+
 	state = {
 		planet: {},
 		loading: true,

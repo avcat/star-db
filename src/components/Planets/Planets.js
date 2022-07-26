@@ -45,7 +45,10 @@ export default class Planets extends React.Component {
 					<li
 						key={index}
 						onClick={() => this.planetSelected(index)}
-						className="list-group-item"
+						className={
+							"list-group-item"
+							+ (index === this.state.planetShowingIndex ? ' active' : '')
+						}
 					>
 						{el.name}
 					</li>

@@ -26,6 +26,7 @@ export default class Swapi_Service {
 			return data;
 		}
 		catch( err ) {
+			// TODO: handle catch for absent images differently
 			console.error( `No way! ${err}` );
 		};
 	}
@@ -62,8 +63,8 @@ export default class Swapi_Service {
 		return transformed_data;
 	}
 
-	async get_all_people() {
-		const data = await this.get_data_from_url( `/people/` );
+	async get_all_people(page = 1) {
+		const data = await this.get_data_from_url( `/people/?page=${page}` );
 		const transformed_data = await data.results.map(async (person) => {
 			const transformed_data = await this.transform_data_person(person);
 			return transformed_data;
@@ -99,8 +100,8 @@ export default class Swapi_Service {
 		return transformed_data;
 	}
 
-	async get_all_planets() {
-		const data = await this.get_data_from_url( `/planets/` );
+	async get_all_planets(page = 1) {
+		const data = await this.get_data_from_url( `/planets/?page=${page}` );
 		const transformed_data = await data.results.map(async (planet) => {
 			const transformed_data = await this.transform_data_planet(planet);
 			return transformed_data;
@@ -140,8 +141,8 @@ export default class Swapi_Service {
 		return transformed_data;
 	}
 
-	async get_all_starships() {
-		const data = await this.get_data_from_url( `/starships/` );
+	async get_all_starships(page = 1) {
+		const data = await this.get_data_from_url( `/starships/?page=${page}` );
 		const transformed_data = await data.results.map(async (starship) => {
 			const transformed_data = await this.transform_data_starship(starship);
 			return transformed_data;
