@@ -25,7 +25,7 @@ export default class Planet extends React.Component {
 		this.get_data(id);
 	}
 
-	SwapiService = new SwapiService();
+
 
 	get_data = async (id) => {
 		try {

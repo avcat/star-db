@@ -31,10 +31,7 @@ export default class Swapi_Service {
 		};
 	}
 
-	get_id = (object) => {
-		const id = parseInt(object?.url.match(/\d+/g)[0]);
-		return id;
-	}
+	get_id = object => object ? parseInt(object?.url.match(/\d+/g)[0]) : null;
 
 	// -------------------------------- PEOPLE --------------------------------
 
@@ -45,14 +42,15 @@ export default class Swapi_Service {
 
 	transform_data_person = async (person) => {
 		const id = this.get_id(person);
+		if (!id) { return null; }
 		const image_url = await this.get_person_image(id);
 
 		return {
 			id: id,
 			name: person.name,
 			gender: person.gender,
-			birthYear: person.birthYear,
-			eyeColor: person.eyeColor,
+			birth_year: person.birthYear,
+			eye_color: person.eyeColor,
 			image_url: image_url
 		}
 	}
@@ -82,6 +80,7 @@ export default class Swapi_Service {
 
 	transform_data_planet = async (planet) => {
 		const id = this.get_id(planet);
+		if (!id) { return null; }
 		const image_url = await this.get_planet_image(id);
 
 		return {
@@ -119,6 +118,7 @@ export default class Swapi_Service {
 
 	transform_data_starship = async (starship) => {
 		const id = this.get_id(starship);
+		if (!id) { return null; }
 		const image_url = await this.get_starship_image(id);
 
 		return {
@@ -126,11 +126,11 @@ export default class Swapi_Service {
 			name: starship.name,
 			model: starship.model,
 			manufacturer: starship.manufacturer,
-			costInCredits: starship.costInCredits,
+			cost_in_credits: starship.costInCredits,
 			length: starship.length,
 			crew: starship.crew,
 			passengers: starship.passengers,
-			cargoCapacity: starship.cargoCapacity,
+			cargo_capacity: starship.cargoCapacity,
 			image_url: image_url
 		}
 	}

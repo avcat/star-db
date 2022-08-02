@@ -1,12 +1,9 @@
 import React from 'react';
-
 import '../../css/bootstrap.min.css';
 import './App.css';
 
 import Header from '../Header';
-
-import Planet from '../Planet';
-import Planets from '../Planets';
+import SingleItem from '../SingleItem/SingleItem';
 
 export default class App extends React.Component {
 
@@ -14,8 +11,9 @@ export default class App extends React.Component {
     return (
       <div className="App p-4">
         <Header />
-        <Planet />
-        <Planets />
+        <SingleItem type={'planet'} id={1} />
+        <SingleItem type={'person'} id={1} />
+        <SingleItem type={'starship'} id={1} />
       </div>
     );
   }
