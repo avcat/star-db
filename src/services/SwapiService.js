@@ -57,6 +57,7 @@ export default class Swapi_Service {
 
 	get_single_person = async (id) => {
 		const person = await this.get_data_from_url(`/people/${id}`);
+		if (!person) { return null; }
 		const transformed_data = await this.transform_data_person(person);
 		return transformed_data;
 	}
@@ -95,6 +96,7 @@ export default class Swapi_Service {
 
 	get_single_planet = async (id) => {
 		const planet = await this.get_data_from_url(`/planets/${id}`);
+		if (!planet) { return null; }
 		const transformed_data = await this.transform_data_planet(planet);
 		return transformed_data;
 	}
@@ -137,6 +139,7 @@ export default class Swapi_Service {
 
 	get_single_starship = async (id) => {
 		const starship = await this.get_data_from_url(`/starships/${id}`);
+		if (!starship) { return null; }
 		const transformed_data = await this.transform_data_starship(starship);
 		return transformed_data;
 	}

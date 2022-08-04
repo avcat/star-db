@@ -1,0 +1,9 @@
+.MultipleItems .list li {
+	cursor: pointer;
+	transition: all .2s ease;
+}
+
+.MultipleItems .list li:hover,
+.MultipleItems .list li.active {
+	background-color: #00bc8c;
+}

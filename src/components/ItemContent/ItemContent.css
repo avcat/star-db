@@ -1,0 +1,16 @@
+.ItemContent > img {
+	max-width: 15em;
+	max-height: 15em;
+}
+
+.ItemContent .card-body {
+	width: 100%;
+}
+
+.ItemContent .card-body p {
+	text-align: center;
+}
+
+.term, .value {
+	text-transform: capitalize;
+}

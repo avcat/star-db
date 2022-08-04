@@ -1,9 +1,0 @@
-.Planets .planets_list li {
-	cursor: pointer;
-	transition: all .2s ease;
-}
-
-.Planets .planets_list li:hover,
-.Planets .planets_list li.active {
-	background-color: #00bc8c;
-}
