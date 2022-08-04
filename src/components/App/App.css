@@ -12,6 +12,10 @@ li {
   list-style: none;
 }
 
+p {
+  margin: 0;
+}
+
 #root {
   width: 100%;
   max-width: 900px;

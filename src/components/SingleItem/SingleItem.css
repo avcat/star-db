@@ -6,3 +6,11 @@
 .SingleItem .card-body {
 	width: 100%;
 }
+
+.SingleItem .card-body p {
+	text-align: center;
+}
+
+.term, .value {
+	text-transform: capitalize;
+}

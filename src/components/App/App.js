@@ -11,9 +11,9 @@ export default class App extends React.Component {
     return (
       <div className="App p-4">
         <Header />
-        <SingleItem type={'planet'} id={1} />
+        <SingleItem type={'planet'} id={2} />
         <SingleItem type={'person'} id={1} />
-        <SingleItem type={'starship'} id={1} />
+        <SingleItem type={'starship'} id={5} />
       </div>
     );
   }

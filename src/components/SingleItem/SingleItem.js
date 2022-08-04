@@ -53,10 +53,19 @@ export default class SingleItem extends React.Component {
 			error,
 			message
 		} = this.state;
+		const type = this.props.type;
+
+		const content = data ? (
+			<SingleItemContent data={data} type={type} />
+		) : (
+			<div className="card-body">
+				<p>No {type} found with id {this.props.id}</p>
+			</div>
+		);
 
 		return (
 			<div className='SingleItem card d-flex flex-row align-items-center p-4 gap-3 justify-content-between'>
-				<SingleItemContent data={data} type={this.props.type} />
+				{content}
 			</div>
 		);
 	}
@@ -88,7 +97,7 @@ export const SingleItemContent = ({data, type}) => {
 				<span className="term">
 					{item[0]}
 				</span>
-				<span>
+				<span className='value'>
 					{item[1]}
 				</span>
 			</li>
