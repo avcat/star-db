@@ -1,16 +1,4 @@
-.SingleItem > img {
-	max-width: 15em;
-	max-height: 15em;
-}
-
-.SingleItem .card-body {
+.SingleItem .not_found p {
 	width: 100%;
-}
-
-.SingleItem .card-body p {
 	text-align: center;
-}
-
-.term, .value {
-	text-transform: capitalize;
 }

@@ -1,3 +1,8 @@
+:root {
+  --accent: #00bc8c;
+  --lwidth: 17em;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -16,6 +21,12 @@ p {
   margin: 0;
 }
 
+img {
+  display: block;
+  width: auto;
+  height: auto;
+}
+
 #root {
   width: 100%;
   max-width: 900px;
@@ -28,13 +39,7 @@ p {
   min-height: 100vh;
   font-size: 1em;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
   gap: 1rem;
-  justify-content: center;
-  align-items: center;
-  align-content: start;
-}
-
-.App > * {
-  grid-column: span 3;
 }

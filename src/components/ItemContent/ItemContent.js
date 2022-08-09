@@ -8,7 +8,7 @@ const ItemContent = ({itemData, type}) => {
 
 	if (itemData) {
 		image_html = itemData.image_url ? (
-			<img className="image rounded" src={itemData.image_url} alt='details' />
+			<img className="image rounded item_image" src={itemData.image_url} alt='details' />
 		) : null;
 		name = <h3 className='name'>{itemData.name}</h3>;
 
@@ -22,12 +22,15 @@ const ItemContent = ({itemData, type}) => {
 			}
 		}
 
-		info_html = info.map(item => {
-			return <li className="list-group-item d-flex justify-content-between">
+		info_html = info.map((item, index) => {
+			const value = item[1];
+			const title = value.length > 15 ? value : null;
+
+			return <li key={index} className="list-group-item d-flex justify-content-between gap-4">
 				<span className="term">
 					{item[0]}
 				</span>
-				<span className='value'>
+				<span className='value' title={title}>
 					{item[1]}
 				</span>
 			</li>
@@ -38,9 +41,8 @@ const ItemContent = ({itemData, type}) => {
 		<div className={'ItemContent type_' + type}>
 			{image_html}
 
-			{name}
-
 			<div className="card-body">
+				{name}
 				<ul className="list-group">
 					{info_html}
 				</ul>

@@ -92,7 +92,7 @@ export default class MultipleItems extends React.Component {
 		) : <Spinner width={60} />;
 
 		return (
-			<div className='MultipleItems card d-flex flex-row align-items-center p-4 gap-3 justify-content-between'>
+			<div className='MultipleItems card d-flex flex-row align-items-center p-4 gap-3'>
 				{namesList}
 				{singleItem}
 			</div>

@@ -26,8 +26,7 @@ export default class Swapi_Service {
 			return data;
 		}
 		catch(err) {
-			// TODO: handle catch for absent images differently
-			console.error(`No way! ${err}`);
+			console.error(`${err}`);
 		};
 	}
 

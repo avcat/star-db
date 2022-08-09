@@ -1,16 +1,47 @@
-.ItemContent > img {
-	max-width: 15em;
-	max-height: 15em;
-}
-
-.ItemContent .card-body {
+.ItemContent {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 100%;
 }
 
-.ItemContent .card-body p {
+.ItemContent .item_image {
+	flex-shrink: 0;
+	width: var(--lwidth);
+}
+
+.ItemContent .card-body {
+	flex-grow: 1;
+	max-width: 25em;
+	padding: 1em 2em;
+}
+
+.ItemContent .name {
 	text-align: center;
 }
 
-.term, .value {
+.ItemContent .value {
+	max-width: 10em;
+	display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: right;
+}
+
+.ItemContent .list-group {
+	margin-top: 1.5em;
+}
+
+.ItemContent li span {
 	text-transform: capitalize;
+}
+
+.ItemContent li {
+	transition: all .2s ease;
+}
+
+.ItemContent li:hover {
+	background-color: var(--accent);
 }

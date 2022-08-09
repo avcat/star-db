@@ -1,9 +1,28 @@
-.MultipleItems .list li {
+.MultipleItems {
+	justify-content: center;
+}
+
+.MultipleItems .ItemContent {
+	flex-shrink: 0;
+	flex-grow: 1;
+	max-width: 25em;
+	display: flex;
+	flex-direction: column;
+}
+
+.MultipleItems .items_list {
+	width: var(--lwidth);
+}
+
+.MultipleItems .items_list li {
 	cursor: pointer;
 	transition: all .2s ease;
 }
 
-.MultipleItems .list li:hover,
-.MultipleItems .list li.active {
-	background-color: #00bc8c;
+.MultipleItems li:hover {
+	background-color: var(--accent);
+}
+
+.MultipleItems .item_image {
+	max-width: var(--lwidth);
 }

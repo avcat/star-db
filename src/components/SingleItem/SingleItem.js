@@ -52,22 +52,19 @@ export default class SingleItem extends React.Component {
 		const {
 			id,
 			type,
-			data,
-			loading,
-			error,
-			message
+			data
 		} = this.state;
 
 		const content = data ? (
 			<ItemContent itemData={data} type={type} />
 		) : (
-			<div className="card-body">
+			<div className="not_found">
 				<p>No {type} found with id {id}</p>
 			</div>
 		);
 
 		return (
-			<div className='SingleItem card d-flex flex-row align-items-center p-4 gap-3 justify-content-between'>
+			<div className={'SingleItem d-flex flex-row align-items-center p-4 gap-3 justify-content-between ' + (data ? 'card' : '')}>
 				{content}
 			</div>
 		);
