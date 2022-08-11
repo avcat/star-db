@@ -2,6 +2,7 @@ import React from 'react';
 import './SingleItem.css';
 import SwapiService from '../../services/SwapiService.js';
 import ItemContent from '../ItemContent';
+import Error from '../Error';
 
 // TODO: create input field to load SingleItem by id on user's demand
 // TODO: shown random SingleItem with intervals
@@ -52,19 +53,18 @@ export default class SingleItem extends React.Component {
 		const {
 			id,
 			type,
-			data
+			data,
+			message
 		} = this.state;
 
 		const content = data ? (
 			<ItemContent itemData={data} type={type} />
 		) : (
-			<div className="not_found">
-				<p>No {type} found with id {id}</p>
-			</div>
+			<Error message={message} type={type} />
 		);
 
 		return (
-			<div className={'SingleItem d-flex flex-row align-items-center p-4 gap-3 justify-content-between ' + (data ? 'card' : '')}>
+			<div className={'SingleItem d-flex flex-row align-items-center gap-3 justify-content-between card'}>
 				{content}
 			</div>
 		);

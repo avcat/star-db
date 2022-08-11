@@ -1,11 +1,37 @@
 import './Error.css';
-import planetExploded from './planet-exploded.jpg';
+import planetDestroyed from './planet-destroyed.jpg';
+import personGone from './person-gone.jpg';
+import starshipStolen from './staship-stolen.png';
 
-const Error = ({message}) => {
+const Error = ({message, type}) => {
+
+	const content = {
+		planet: {
+			img: planetDestroyed,
+			msg: `The planet you're looking for is probably annihilated already :C`
+		},
+		person: {
+			img: personGone,
+			msg: `The person you're looking for is probably gone :C`
+		},
+		starship: {
+			img: starshipStolen,
+			msg: `The starship you're looking for has been probably stolen :C`
+		},
+	}
+
 	return (
 		<div className='Error'>
-			<img className='rounded-circle shadow-md mb-3' width={120} src={planetExploded} alt='No planet anymore' />
-			<p className='fs-5'>The planet you're looking for is probably annihilated already :C</p>
+
+			<img
+				className='rounded-circle shadow-md mb-3'
+				src={content[type].img}
+				alt={`No ${type} anymore`}
+			/>
+			<p className='fs-5'>
+				{content[type].msg}
+			</p>
+
 			<code>
 				{ message }
 			</code>
