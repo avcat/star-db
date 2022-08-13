@@ -20,6 +20,10 @@ export default class SingleItem extends React.Component {
 		message: null
 	}
 
+	// TODO: create HOC, that contains componentDidMount, get_data -> logic for getting data and adding it to the state.
+	// Use them in SingleItem and MultipleItems.
+	// Docs: https://reactjs.org/docs/higher-order-components.html
+
 	componentDidMount() {
 		this.get_data(this.state.id);
 	}
